@@ -1,0 +1,16 @@
+README.md
+pyproject.toml
+src/vqe_knapsack/__init__.py
+src/vqe_knapsack/ansatz_factory.py
+src/vqe_knapsack/classical.py
+src/vqe_knapsack/config.py
+src/vqe_knapsack/experiment.py
+src/vqe_knapsack/hamiltonian.py
+src/vqe_knapsack/optimizer_factory.py
+src/vqe_knapsack/solver.py
+src/vqe_knapsack.egg-info/PKG-INFO
+src/vqe_knapsack.egg-info/SOURCES.txt
+src/vqe_knapsack.egg-info/dependency_links.txt
+src/vqe_knapsack.egg-info/entry_points.txt
+src/vqe_knapsack.egg-info/requires.txt
+src/vqe_knapsack.egg-info/top_level.txt

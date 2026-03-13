@@ -1,0 +1,20 @@
+{
+  "values": [12, 1, 4, 1, 2, 7, 8, 3, 11, 30],
+  "weights": [4, 2, 10, 1, 2, 8, 5, 1, 3, 4],
+  "capacity": 18,
+  "a_schedule": [1, 3, 5, 10, 20, 50, 100, 200, 500, 1000],
+  "output_dir": "outputs",
+  "ansatz_configs": [
+    {"reps": 2, "rotation_blocks": ["ry"], "entanglement": "linear", "entanglement_blocks": ["cx"]},
+    {"reps": 3, "rotation_blocks": ["ry", "rz"], "entanglement": "full", "entanglement_blocks": ["cx"]},
+    {"reps": 4, "rotation_blocks": ["ry"], "entanglement": "full", "entanglement_blocks": ["cx"]},
+    {"reps": 5, "rotation_blocks": ["ry"], "entanglement": "full", "entanglement_blocks": ["cx"]},
+    {"reps": 6, "rotation_blocks": ["ry"], "entanglement": "full", "entanglement_blocks": ["cx"]}
+  ],
+  "optimizer_configs": [
+    {"name": "COBYLA", "options": {"maxiter": 100}},
+    {"name": "COBYLA", "options": {"maxiter": 400}},
+    {"name": "COBYLA", "options": {"maxiter": 800}},
+    {"name": "COBYLA", "options": {"maxiter": 2000}}
+  ]
+}

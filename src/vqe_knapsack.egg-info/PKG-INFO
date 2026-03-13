@@ -1,0 +1,94 @@
+Metadata-Version: 2.4
+Name: vqe-knapsack
+Version: 1.0.0
+Summary: VQE Knapsack Optimizer — standalone local project reproducing Colab notebook
+Author: Leonardo Maximino Bernardo
+Requires-Python: >=3.12
+Description-Content-Type: text/markdown
+Requires-Dist: qiskit==2.3.0
+Requires-Dist: qiskit-algorithms==0.4.0
+Requires-Dist: numpy<3,>=1.24
+Requires-Dist: scipy>=1.10
+Requires-Dist: pylatexenc==2.10
+Requires-Dist: python-dotenv>=1.0
+Requires-Dist: rich>=13.0
+Requires-Dist: structlog>=24.0
+Requires-Dist: mcp[cli]>=1.4.0
+Provides-Extra: dev
+Requires-Dist: pytest>=8.0; extra == "dev"
+Requires-Dist: pytest-cov>=5.0; extra == "dev"
+Requires-Dist: pytest-mock>=3.14; extra == "dev"
+Requires-Dist: ruff>=0.4; extra == "dev"
+Requires-Dist: mypy>=1.10; extra == "dev"
+Requires-Dist: jupyter>=1.0; extra == "dev"
+Requires-Dist: ipykernel>=6.0; extra == "dev"
+
+# VQE Knapsack — Standalone Local Project
+
+Reprodução fiel do notebook `vqe_knapsack_penalty_annealing_v_5_itens_analise_avancada.ipynb`
+**sem dependência do Google Colab**. Implementado com SDD + MCP + Clean Code + TDD.
+
+## Problema
+
+Problema da Mochila (0/1 Knapsack) com **n=10 itens**, W=18, resolvido por
+**VQE com Penalty Annealing** via Qiskit 2.3.0.
+
+| Itens | valores | pesos | W |
+|---|---|---|---|
+| 10 | [12,1,4,1,2,7,8,3,11,30] | [4,2,10,1,2,8,5,1,3,4] | 18 |
+
+**Solução clássica:** bitstring `1001001111` → valor=65
+
+## Setup rápido
+
+```bash
+# 1. Instalar dependências
+make install
+
+# 2. Rodar testes (TDD)
+make test
+
+# 3. Rodar experimentos (200 experimentos VQE)
+make run
+
+# 4. Gerar relatório
+make report
+
+# 5. Abrir notebook local
+make notebook
+
+# 6. Iniciar MCP server
+make mcp
+```
+
+## Estrutura
+
+```
+src/vqe_knapsack/
+├── config.py          # KnapsackConfig (frozen dataclass)
+├── hamiltonian.py     # build_knapsack_hamiltonian() — pure function
+├── classical.py       # brute_force_solver() — O(2^n) reference
+├── ansatz_factory.py  # AnsatzFactory — n_local circuit builder
+├── optimizer_factory.py  # OptimizerFactory — COBYLA/SPSA
+├── solver.py          # VQESolver — warm-start, typed SolverResult
+└── experiment.py      # ExperimentRunner — orquestra os 200 experimentos
+
+tests/
+├── unit/              # unit tests com mocks (sem VQE real)
+└── integration/       # test_e2e.py roda VQE real (n=3, rápido)
+
+mcp_server/server.py   # FastMCP: list_results, get_best_result, get_config
+scripts/run_experiments.py  # CLI com rich progress bar
+configs/default.json   # 10 itens (200 experiments)
+configs/fast.json      # 3 itens (3 experiments — para testes rápidos)
+```
+
+## Dependências principais
+
+- `qiskit==2.3.0` (mesma versão do Colab)
+- `qiskit-algorithms==0.4.0`
+- `numpy`, `scipy`, `rich`, `structlog`, `mcp`
+
+## Licença
+
+Projeto acadêmico — Leonardo Maximino Bernardo, 2026.

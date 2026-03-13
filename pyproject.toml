@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "vqe-knapsack"
+version = "1.0.0"
+description = "VQE Knapsack Optimizer — standalone local project reproducing Colab notebook"
+readme = "README.md"
+requires-python = ">=3.12"
+authors = [
+    { name = "Leonardo Maximino Bernardo" }
+]
+
+dependencies = [
+    "qiskit==2.3.0",
+    "qiskit-algorithms==0.4.0",
+    "numpy>=1.24,<3",
+    "scipy>=1.10",
+    "pylatexenc==2.10",
+    "python-dotenv>=1.0",
+    "rich>=13.0",
+    "structlog>=24.0",
+]
+
+[project.optional-dependencies]
+mcp = [
+    "mcp[cli]>=1.4.0",
+]
+dev = [
+    "pytest>=8.0",
+    "pytest-cov>=5.0",
+    "pytest-mock>=3.14",
+    "ruff>=0.4",
+    "mypy>=1.10",
+    "jupyter>=1.0",
+    "ipykernel>=6.0",
+]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "N", "W", "UP", "B", "C4", "RUF"]
+ignore = ["E501"]
+
+[tool.mypy]
+python_version = "3.12"
+strict = true
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-v --tb=short"
+markers = [
+    "unit: fast unit tests (no real VQE)",
+    "integration: integration tests (run real VQE on small instances)",
+    "aer: slow tests that import qiskit_aer (run separately with -m aer)",
+]
+
+[tool.coverage.run]
+source = ["src"]
+omit = ["tests/*", "scripts/*", "mcp_server/*"]
+
+[tool.coverage.report]
+fail_under = 80

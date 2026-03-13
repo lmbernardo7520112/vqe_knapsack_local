@@ -1,0 +1,39 @@
+{
+    "values": [
+        3,
+        4,
+        5
+    ],
+    "weights": [
+        2,
+        3,
+        4
+    ],
+    "capacity": 5,
+    "a_schedule": [
+        1,
+        5,
+        10
+    ],
+    "output_dir": "outputs",
+    "ansatz_configs": [
+        {
+            "reps": 2,
+            "rotation_blocks": [
+                "ry"
+            ],
+            "entanglement": "linear",
+            "entanglement_blocks": [
+                "cx"
+            ]
+        }
+    ],
+    "optimizer_configs": [
+        {
+            "name": "COBYLA",
+            "options": {
+                "maxiter": 200
+            }
+        }
+    ]
+}

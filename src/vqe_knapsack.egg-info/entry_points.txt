@@ -1,0 +1,3 @@
+[console_scripts]
+vqe-report = scripts.generate_report:main
+vqe-run = scripts.run_experiments:main
